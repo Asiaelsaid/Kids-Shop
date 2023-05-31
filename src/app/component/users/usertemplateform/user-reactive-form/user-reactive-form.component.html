@@ -1,0 +1,145 @@
+<div class="w-50 m-auto p-1">
+  <form [formGroup]="userFrom"  (ngSubmit)="addUser()">
+    <div class="mb-3">
+      <label for="fname" class="form-label">First Name</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        placeholder="first name"
+        id="fname"
+        name="firstName"
+        minlength="4"
+        formControlName="firstName"
+        [ngClass]="{
+          'is-invalid':
+            (firstName?.touched || firstName?.dirty) && !firstName?.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="(firstName)?.errors?.['required']">
+          please enter your first name</span
+        >
+        <span *ngIf="(firstName)?.errors?.['minlength']">
+          first name must be longer than 4 characters
+        </span>
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="lname" class="form-label">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lname"
+        placeholder="last name"
+        name="lastName"
+        minlength="4"
+        formControlName="lastName"
+        [ngClass]="{
+          'is-invalid':
+            (lastName?.touched || lastName?.dirty) && !lastName?.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="(lastName)?.errors?.['required']">
+          please enter your first name</span
+        >
+        <span *ngIf="(lastName)?.errors?.['minlength']">
+          first name must be longer than 4 characters
+        </span>
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        required
+        email
+        class="form-control"
+        placeholder="email address"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="email"
+        formControlName="email"
+        [ngClass]="{
+          'is-invalid': (email?.touched || email?.dirty) && !email?.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="(email)?.errors?.['required']">
+          please enter your first name</span
+        >
+        <span *ngIf="(email)?.errors?.['minlength']">
+          first name must be longer than 4 characters
+        </span>
+      </span>
+    </div>
+    <div formGroupName="passwordGroup">
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="password"
+          id="exampleInputPassword1"
+          formControlName="password"
+          [ngClass]="{ 'is-invalid': passwordMessage }"
+        />
+        <span class="invalid-feedback">
+          {{ passwordMessage }}
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >confirm Password</label
+        >
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          formControlName="confirmPassword"
+          placeholder="confirm password"
+          [ngClass]="{
+            'is-invalid':
+              userFrom.get('passwordGroup')?.errors ||
+              ((userFrom.get('passwordGroup.confirmPassword')?.touched ||
+                userFrom.get('passwordGroup.confirmPassword')?.dirty) &&
+                !userFrom.get('passwordGroup.confirmPassword')?.valid)
+          }"
+        />
+        <span class="invalid-feedback">
+          <span
+            *ngIf=" userFrom.get('passwordGroup.confirmPassword')?.errors?.['required'] "
+          >
+            please enter your confirm password
+          </span>
+          <span *ngIf=" userFrom.get('passwordGroup')?.errors?.['match'] ">
+            confirm password not same password
+          </span>
+        </span>
+      </div>
+    </div>
+    Address :
+    <div formArrayName="address">
+      <div *ngFor="let add of address.controls; let item = index">
+        <div [formGroupName]="item">
+          city name:
+          <input type="text" formControlName="city"  placeholder="city" />
+          street:
+          <input type="text" formControlName="street" class="m-2"  placeholder="street"/>
+          <button class="btn btn-danger m-2" (click)="removeAddress(item)">
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-warning" (click)="addAddress()">
+      Add Address
+    </button>
+    <br /><br />
+    <button type="submit" class="btn btn-primary" [disabled]="userFrom.invalid">
+      Submit
+    </button>
+  </form>
+</div>

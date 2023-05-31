@@ -1,0 +1,102 @@
+<section style="background-color: #fff6f6f6">
+  <div class="container py-5">
+    <!-- <div class="row"> -->
+    <!-- <p>Client Name {{ClientName}} </p>
+        <h1>{{productStore.Name}}</h1>
+        <img src="{{productStore.logo}}" alt="" style="height:100px; width:150px;"><br><br>
+
+        <ul>
+          <li *ngFor="let item of productStore.branches">{{item}}</li>
+        </ul>
+        <div class="pro-1">
+          <img src="{{Product.Img}}" alt="" >
+        <ul>
+          <li>ID:{{Product.ID}}</li>
+        <li>Name:{{Product.Name}}</li>
+        <li>Quantity:{{Product.Quantity}}</li>
+        <li>Price:{{Product.Price}}</li>
+        <li>CateogryID:{{Product.CateogryID}}</li>
+        </ul>
+        </div>
+      </div> -->
+    <div *ngIf="isVisible">
+      <h2>Thanks for purchasing from our Store {{ ClientName }}</h2>
+    </div>
+
+    <div class="mb-3 col-sm-3">
+      <label for="" class="form-label">Cateogry : </label>
+      <select
+        class="form-select form-select-lg"
+        name=""
+        id="proCat"
+        [(ngModel)]="selecedCatID"
+        (change)="filterProdCateogryById()"
+      >
+        <option value="0" selected>All</option>
+        <option *ngFor="let Cateogry of categoryList" [value]="Cateogry.ID">
+          {{ Cateogry.Name }}
+        </option>
+      </select>
+    </div>
+    <!-- <div class="text-secondary">ID Cateogry is : {{ selecedCatID }}</div> -->
+    <div class="row">
+      <div
+        class="col-sm-3"
+        *ngFor="let product of productListOfCat"
+        [ngClass]="{ 'bg-secondary': product.Quantity == 1 }"
+        (click)="productDetails(product.id)"
+      >
+        <div>
+
+          <img [src]="product.Img" alt="" class="img-fluid" CardStyle="30px" />
+
+          <h4>{{ product.Name }}</h4>
+          <h5>{{ product.Price | currency : "EGP" : "symbol" }}</h5>
+          <h3
+            style="color: red"
+            *ngIf="product.Discount != Discount; else inDicount"
+          >
+            We offer an explicit discount of:{{ product.Discount }}
+          </h3>
+          <ng-template #inDicount></ng-template>
+          <ng-template>
+            <span> no thing</span>
+          </ng-template>
+          <div>
+            <ng-container [ngSwitch]="product.Quantity">
+              <ng-container *ngSwitchCase="0">out of stock</ng-container>
+              <ng-container *ngSwitchCase="1">last one item</ng-container>
+              <ng-container *ngSwitchCase="2">last two item</ng-container>
+              <ng-container *ngSwitchDefault>in stock</ng-container>
+            </ng-container>
+          </div>
+          <button
+            class="btn mb-3 mt-2 btn-danger"
+            [disabled]="product.Quantity == 0"
+            (click)="addToCart(product)"
+          >
+            Add to cart
+            <i class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i>
+          </button>
+          <button class="m-1 btn btn-Info " (click)="editProduct(product.id)"> Edit </button>
+        </div>
+      </div>
+      <button class="btn m-4 btn-warning col-1" (click)="toToggle()">
+        Buy
+      </button>
+      <div class="mb-3">
+        <!-- <label for="" class="form-label" >Credit Card</label>
+        <input
+          type="number"
+          class="form-control"
+          name=""
+          id=""
+          placeholder="xxxx-xxxx-xxxx-xxxx"
+
+          value="" formetCard
+        />
+        <p>{{creitCardNumber|formetCard}}</p> -->
+      </div>
+    </div>
+  </div>
+</section>

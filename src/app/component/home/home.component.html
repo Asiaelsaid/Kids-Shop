@@ -1,0 +1,21 @@
+ <div class="row">
+  <div class="col-sm-6 m-3">
+    <h1 class="text-danger">{{productStore.Name}}</h1>
+    <h2>  Hi {{ClientName}} </h2>
+        <img src="{{productStore.logo}}" width="350px" height="350px" alt=""  ><br><br>
+
+        <ul>
+          <li *ngFor="let item of productStore.branches">{{item}}</li>
+        </ul>
+        <!-- <div class="pro-1">
+          <img src="{{Product.Img}}" alt="" >
+        <ul>
+        <li><h2>Name:{{Product.Name}}</h2></li>
+        <li>Quantity:{{Product.Quantity}}</li>
+        <li>Price:{{Product.Price}}</li>
+        <li>CateogryID:{{Product.CateogryID}}</li>
+        </ul>
+        </div> -->
+      </div>
+    </div>
+

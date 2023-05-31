@@ -1,0 +1,81 @@
+<div class="w-50 m-auto p-1">
+  <form (ngSubmit)="addUser()" #signUpFrom="ngForm">
+    <div class="mb-3">
+      <label for="fname" class="form-label">First Name</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="fname"
+        name="firstName"
+        minlength="4"
+        [(ngModel)]="user.firstName"
+        #firstNameVar="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (firstNameVar.touched || firstNameVar.dirty) && !firstNameVar.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="firstNameVar.errors?.['required']">
+          please enter your first name</span
+        >
+        <span *ngIf="firstNameVar.errors?.['minlength']">
+          first name must be longer than 4 characters
+        </span>
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="lname" class="form-label">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lname"
+        [(ngModel)]="user.lastName"
+        name="lastName"
+        minlength="4"
+        #lastNameVar="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (lastNameVar.touched || lastNameVar.dirty) && !lastNameVar.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="lastNameVar.errors?.['required']">
+          please enter your last name</span
+        >
+        <span *ngIf="lastNameVar.errors?.['minlength']">
+          last name must be longer than 4 characters
+        </span>
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        required
+        email
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        [(ngModel)]="user.email"
+        name="email"
+        #emailVar="ngModel"
+        [ngClass]="{
+          'is-invalid': (emailVar.touched || emailVar.dirty) && !emailVar.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="emailVar.errors?.['required']">
+          please enter your email</span
+        >
+        <span *ngIf="emailVar.errors?.['email']">
+          please enter valid email
+        </span>
+      </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="signUpFrom.invalid">Submit</button>
+  </form>
+</div>

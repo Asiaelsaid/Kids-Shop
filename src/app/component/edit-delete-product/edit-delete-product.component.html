@@ -1,0 +1,123 @@
+<div class="w-50 m-auto p-1">
+  <form  #editProductFrom="ngForm">
+    <div class="mb-3">
+      <label for="id" class="form-label">ID</label>
+      <input
+        type="number"
+        required
+        class="form-control"
+        placeholder="enter product id"
+        id="id"
+        name="id"
+        [(ngModel)]="product.id"
+        #idVar="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (idVar.touched || idVar.dirty) && !idVar.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="idVar.errors?.['required']">
+          please enter your id</span
+        >
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label"> Name</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Name product"
+        id="name"
+        [(ngModel)]="product.Name"
+        name="Name"
+        minlength="4"
+        #nameVar="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (nameVar.touched || nameVar.dirty) && !nameVar.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="nameVar.errors?.['required']">
+          please enter your product name</span
+        >
+        <span *ngIf="nameVar.errors?.['minlength']">
+          product name must be longer than 4 characters
+        </span>
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="Quantity" class="form-label">Quantity</label>
+      <input
+        type="number"
+        required
+        class="form-control"
+        placeholder="Quantity"
+        id="Quantity"
+        name="Quantity"
+        [(ngModel)]="product.Quantity"
+        #quantityVar="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (quantityVar.touched || quantityVar.dirty) && !quantityVar.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="quantityVar.errors?.['required']">
+          please enter your quantity </span
+        >
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="Price" class="form-label">Price</label>
+      <input
+        type="number"
+        required
+        class="form-control"
+        placeholder="Price"
+        id="Price"
+        name="Price"
+        [(ngModel)]="product.Price"
+        #priceVar="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (priceVar.touched || priceVar.dirty) && !priceVar.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="priceVar.errors?.['required']">
+          please enter your priceVar </span
+        >
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="Img" class="form-label"> Img Url</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder=" Url Img  product"
+        id="Img"
+        [(ngModel)]="product.Img"
+        name="Img"
+        minlength="4"
+        #ImgVar="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (ImgVar.touched || ImgVar.dirty) && !ImgVar.valid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="ImgVar.errors?.['required']">
+          please enter your product url img</span
+        >
+        <span *ngIf="ImgVar.errors?.['minlength']">
+          product url img name must be longer than 4 characters
+        </span>
+      </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary m-1" [disabled]="editProductFrom.invalid" (click)="editProduct()">Edit Product</button>
+    <button type="submit" class="btn btn-danger m-1"  (click)="deleteProduct()">Delete Product</button>
+  </form>
+</div>

@@ -1,0 +1,48 @@
+<!-- <div class="card m-4" style="width: 25%">
+  <img [src]="product?.Img" class="card-img-top" />
+  <hr />
+  <div class="card-body">
+    <h5 class="card-title">{{ product?.Name }}</h5>
+    <br />
+    <div>{{ product?.Price }}</div>
+    <br />
+    <div>{{product?.Cateogry}}</div> -->
+    <!-- <div>{{ product?.Quantity }}</div>
+    <br />
+    <button type="button" class="btn btn-outline-secondary" (click)="goBack()">
+      Back
+    </button>
+  </div>
+
+</div>  -->
+<div class="container-fluid">
+  <div class="row ">
+    <div>
+      <ng-container [ngSwitch]="product?.Quantity">
+        <ng-container *ngSwitchCase="0"><h4 class="text-danger">out of stock</h4></ng-container>
+        <ng-container *ngSwitchCase="1">last one item</ng-container>
+        <ng-container *ngSwitchCase="2">last two item</ng-container>
+        <ng-container *ngSwitchDefault>in stock</ng-container>
+      </ng-container>
+    </div>
+    <div class="col-sm-6">
+      <img [src]="product?.Img"class=" img-fluid" />
+    </div>
+    <div class="col-sm-6 mt-4">
+     <h2>Name : {{ product?.Name }}</h2>
+     <h3> Details : {{product?.Details}}</h3>
+     <h3> Price : {{ product?.Price |currency:'EGP'}}</h3>
+     <h4> Quantity : {{ product?.Quantity }}</h4>
+    </div>
+
+  </div>
+</div>
+<button type="button" class="btn btn-outline-secondary m-3"(click)="previous()" [disabled]="currentProductId==productsId[0]" >
+  previous
+</button>
+<button type="button" class="btn btn-outline-danger m-3" (click)="goBack()">
+  Back
+</button>
+<button type="button" class="btn btn-outline-warning m-3"    (click)="next()" [disabled]="currentProductId==productsId.length-1">
+  Next
+</button>
